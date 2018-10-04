@@ -39,8 +39,8 @@ SLIDE 2: CAN Diagram and The CAN Issue
 name: can-cannot-2-electric-boogaloo
 template: basic-layout
 ## Easy, do both separately!
-- Nope, still need CAN for control + infotainment
-- But ROTS cannot do infotainment
+- No, still need CAN for control + infotainment
+- But RTOS cannot do infotainment
 - CAN ... cannot?
 ???
 - can ~cannot~ do this
