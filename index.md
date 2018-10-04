@@ -21,7 +21,7 @@ SLIDE 0: Title
 ---
 name: thesis-statement
 template: title-layout
-##### Design a proof of concept system that allows for Android OS to be emulated on x86 hardware to serve as a host for low criticality (infotainment) processing in the presence of a high criticality sister guest. 
+#### Design a proof of concept system that allows for Android OS to be emulated on x86 hardware to serve as a host for low criticality (infotainment) processing in the presence of a high criticality sister guest. 
 ???
 SLIDE 1: Thesis Statement
 - Infrastructure for heterogenous mixed criticality compute for the cars of the future
