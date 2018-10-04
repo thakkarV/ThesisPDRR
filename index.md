@@ -50,7 +50,7 @@ name: can-cannot-2-electric-boogaloo
 template: basic-layout
 ## Easy, do both separately!
 - No, still need CAN for control and infotainment
-- But RTOS cannot do infotainment, its breaking your car!
+- But RTOS cannot do infotainment, it is breaking your car!
 - CAN ... cannot?
 ???
 - can ~cannot~ do this
