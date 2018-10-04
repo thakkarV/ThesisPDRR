@@ -92,7 +92,7 @@ SLIDE 6: Thesis Statement
 ---
 name: timeline
 class: middle, center
-![timeline](./img/timeline-inv.png =1080x560)
+![timeline-inv](./img/timeline-inv.png)
 ???
 SLIDE 7: Timeline of work to be done
 - Checkpoint one already done
