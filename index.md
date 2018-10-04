@@ -35,6 +35,7 @@ SLIDE 2: CAN Diagram and The CAN Issue
 - CAN buses dominate communication in automobiles.
 - But this is not scalable for modern cars that have very heavy compute needs.
 
+
 ---
 name: rtos
 template: basic-layout
@@ -73,6 +74,7 @@ name: solution
 template: title-layout
 ## Share CAN buffer with another OS and partition hardware
 
+
 ---
 name: shared-nic-example
 .center[![vm-shnic-inv](./img/vm-shnic-inv.png)]
@@ -95,6 +97,14 @@ class: center, title
 ???
 SLIDE 5: Requirements
 - What needs to get done basically
+
+---
+name: method
+template: basic-layout
+## Nice... how?
+1. Configure MMU to map phys-mem and agree on region (type 1)
+2. Init shmem in host, mount as ramdisk and mmap in guests (type 2)
+3. Write drivers in guests to ensure a secure API for userland
 
 
 ---
