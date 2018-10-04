@@ -36,11 +36,20 @@ SLIDE 2: CAN Diagram and The CAN Issue
 - But this is not scalable for modern cars that have very heavy compute needs.
 
 ---
+name: rtos
+template: basic-layout
+## Real Time Operating System
+- Time is a first class resource
+- Need to ensure control systems processing has no delays
+- Unification is essential for the automobiles of the future
+
+
+---
 name: can-cannot-2-electric-boogaloo
 template: basic-layout
 ## Easy, do both separately!
-- No, still need CAN for control + infotainment
-- But RTOS cannot do infotainment
+- No, still need CAN for control and infotainment
+- But RTOS cannot do infotainment, its breaking your car!
 - CAN ... cannot?
 ???
 - can ~cannot~ do this
@@ -53,12 +62,16 @@ template: basic-layout
 ## Issue With Consolidation
 - Let RTOS do control processing for CAN
 - Still need to share data for low criticality processing
-- But that breaks ROTS timing guarantees 
+- But that breaks ROTS timing guarantees
 ???
 SLIDE 3: Problem with consolidation
 - cannot let RTOS do everything even if consolidated
 - Need different OSes so that we can process separately
 
+---
+name: solution
+template: title-layout
+## Share CAN buffer with another OS and partition hardware
 
 ---
 name: shared-nic-example
