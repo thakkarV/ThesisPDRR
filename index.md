@@ -34,6 +34,15 @@ name: can-cannot
 SLIDE 2: CAN Diagram and The CAN Issue
 - CAN buses dominate communication in automobiles.
 - But this is not scalable for modern cars that have very heavy compute needs.
+
+---
+name: can-cannot-2-electric-boogaloo
+template: basic-layout
+## Easy, do both separately!
+- Nope, still need CAN for control + infotainment
+- But ROTS cannot do infotainment
+- CAN ... cannot?
+???
 - can ~cannot~ do this
 - Right now they just have both
 - But what if we could unify everything under a single multi-core processor?
