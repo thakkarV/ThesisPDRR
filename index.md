@@ -29,7 +29,7 @@ SLIDE 1: Thesis Statement
 
 ---
 name: can-cannot
-![can-example-inv](./img/can-example-inv.png)
+.center[![can-example-inv](./img/can-example-inv.png)]
 ???
 SLIDE 2: CAN Diagram and The CAN Issue
 - CAN buses dominate communication in automobiles.
@@ -53,7 +53,7 @@ SLIDE 3: Problem with consolidation
 
 ---
 name: shared-nic-example
-![shnic-inv](./img/vm-shnic-inv.png)
+.center[![shnic-inv](./img/vm-shnic-inv.png)]
 ???
 SLIDE 4: NIC Share Diagram
 - Historic method of setting up cross-vm comms.
@@ -63,13 +63,13 @@ SLIDE 4: NIC Share Diagram
 
 ---
 name: requirements
-template: basic-layout
+class: center, title
 ## Requirements
 - Setup a shared memory region between two Guest OSes
 - Provide low latency read-write access to it
 - Preserve security aspects of virtualization
 - Ensure no side-effects for high criticality processing of ROTS
-![design-diagram-inv](./img/design-diagram-inv.png)
+.center[![design-diagram-inv](./img/design-diagram-inv.png)]
 ???
 SLIDE 5: Requirements
 - What needs to get done basically
