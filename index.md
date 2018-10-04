@@ -29,7 +29,7 @@ SLIDE 1: Thesis Statement
 
 ---
 name: can-cannot
-.center[![CAN-Example](./img/can-example-inv.png =1080x768)]
+![CAN-Example](./img/can-example-inv.png =1080x768)
 ???
 SLIDE 2: CAN Diagram and The CAN Issue
 - CAN buses dominate communication in automobiles.
@@ -53,7 +53,7 @@ SLIDE 3: Problem with consolidation
 
 ---
 name: shared-nic-example
-.center[![Shared-NIC-Example](./img/vm-shnic-inv.png =1080x756)]
+![Shared-NIC-Example](./img/vm-shnic-inv.png =1080x756)
 ???
 SLIDE 4: NIC Share Diagram
 - Historic method of setting up cross-vm comms.
@@ -69,7 +69,7 @@ template: basic-layout
 - Provide low latency read-write access to it
 - Preserve security aspects of virtualization
 - Ensure no side-effects for high criticality processing of ROTS
-.center[![Design-Diagram](./img/design-diagram-inv.png =1080x460)]
+![Design-Diagram](./img/design-diagram-inv.png =1080x460)
 ???
 SLIDE 5: Requirements
 - What needs to get done basically
@@ -92,7 +92,7 @@ SLIDE 6: Thesis Statement
 ---
 name: timeline
 class: middle, center
-![Timeline](./img/timeline-inv.png =1080x560)
+![Timeline](./img/timeline-inv.png =540x280)
 ???
 SLIDE 7: Timeline of work to be done
 - Checkpoint one already done
