@@ -102,7 +102,7 @@ SLIDE 5: Requirements
 name: method
 template: basic-layout
 ## Nice... how?
-1. Configure MMU to map phys-mem and agree on region (type 1)
+1. Configure MMU to map phys-mem and agree on region for DMA (type 1)
 2. Init shmem in host, mount as ramdisk and mmap in guests (type 2)
 3. Write drivers in guests to ensure a secure API for userland
 
