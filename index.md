@@ -53,7 +53,7 @@ SLIDE 3: Problem with consolidation
 
 ---
 name: shared-nic-example
-.center[![shnic-inv](./img/vm-shnic-inv.png)]
+.center[![vm-shnic-inv](./img/vm-shnic-inv.png)]
 ???
 SLIDE 4: NIC Share Diagram
 - Historic method of setting up cross-vm comms.
