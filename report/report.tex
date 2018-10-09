@@ -14,10 +14,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[12pt]{article}
 \usepackage[english]{babel}
-\usepackage[utf8x]{inputenc}
 \usepackage{amsmath}
 \usepackage{graphicx}
-\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{float}
 
 \begin{document}
 \begin{titlepage}
@@ -51,18 +50,18 @@ Dr. Richard West
 \end{center}
 \end{titlepage}
 
-
 \tableofcontents
 \pagebreak
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Thesis}
+\section{Thesis Statement}
 \begin{center}
 \large Design and implement a proof of concept system for low latency and low overhead cross virtual machine communication between an Android OS and a Quest RTOS emulated on x86 multi-core processors while ensuring the timing constrains of the mixed criticality domain.
 \end{center}
 
+
 \section{Summary}
-We intend to design and implement a proof of concept system for the future autonomous car platforms that allow for mixed criticality processing on a consolidated high performance system on chip. We have chosen x86 processors as the platform of choice due to client requirements as well as the ready availability, widespread use and proven functionality of multi-core x86 processors. We believe that time is a first class resource and therefore require that the final platform have a Real Time Operating System that is responsible for the high criticality control processing of the car. In addition, our client requires that we have an Android OS also running on the same platform to serve as the low criticality (info-tianment) processing. However, we still need to enable some cross virtual machine communication to maintian some shared data such as CAN bus messages of the car in a way that does not interfere with the timing guarantees of the RTOS control processing. The goal of the thesis is to design and implement a proof of concept system that allows such cross-VM communication within a mixed criticality domain.
+We intend to design and implement a proof of concept system for the future autonomous car platforms that allow for mixed criticality processing on a consolidated high performance system on chip. We have chosen x86 processors as the platform of choice due to client requirements as well as the ready availability, widespread use and proven functionality of multi-core x86 processors. We believe that time is a first class resource and therefore require that the final platform have a Real Time Operating System that is responsible for the high criticality control processing of the car. In addition, our client requires that we have an Android OS also running on the same platform to serve as the low criticality (info-tianment) processing. However, we still need to enable some cross virtual machine communication to maintain some shared data such as CAN bus messages of the car in a way that does not interfere with the timing guarantees of the RTOS control processing. The goal of the thesis is to design and implement a proof of concept system that allows such cross-VM communication within a mixed criticality domain.
 
 
 \section{Motivation}
@@ -74,27 +73,42 @@ The approach taken by Professor Rich West and his team has been to design and bu
 
 
 \section{Objectives and Methodology}
-The primary objective of the project is to design and implement a software solution to enable cross VM communication. Preliminary research for the project will asses the feasibility of two different methods to achieve this. 
+The primary objective of the project is to design and implement a software solution to enable cross VM communication. Preliminary research for the project will asses the feasibility of two different methods to achieve this. Although the final product will utilize Quest-V as the hypervisor, for the purpose of this proof of concept, we relax this requirement to be able to use any hypervisor of our choosing that can successfully demonstrate the validity of the concept. To this end, we have the following two options for the choice of hypervisor:
+
+\begin{itemize}
+	\item Linux as the host operating system with a type 2 hypervisor (KVM, qemu etc.) on top of it.
+	\item Quest-V as the type 1 hypervisor with guests running directly on it.
+\end{itemize} 
+
+The first method would be easier to set up as it would require no direct hardware configuration. In the former case, we first intend to start by setting up a RAM disk in the host operating system, create a single file in it, mount that file in both the guest operating systems and then memory map the file to serve as the shared memory region between the two guests. If this is not fast enough for our requirements due to the file system abstraction overhead, we again have two choices for further optimizations. We can either modify the type 2 hypervisor to map certain virtual memory pages of the host operating system to both the guests as a method to implement cross-VM shared memory, or we revert to using Quest-V type 1 hypervisor. Modifications to existing hypervisors such as qemu would be difficult due to the complexity of the large codebase, and we would likely take the latter approach since Quest-V is the requirement for the final product and both approaches would require substantial modifications anyway. To use Quest-V hypervisor, we would change the configuration of the x86 memory management unit (MMU) mapping at the hardware level to to map a certain region of physical memory to the same virtual memory pages for both guests. Once the MMU is configured, we would then write specific drivers (one for each guest) that can then expose this shared memory region to userland processes through a system call API. In any of these scenarios, the overall architecture of our approach looks functionally similar to the representation in figure 1.
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{./../img/design-diagram-noinv.png}
+	\caption{Design diagram of the shared memory style cross-VM communication. The green sections within the VMs represent the driver layer, the shared memory region in the middle represents the implementation of either directly shared memory access through the hypervisor or through a file-system abstraction.\protect\footnotemark}
+	\label{design-diagram}
+\end{figure}
+\footnotetext{Yi Ren. 2016. Shared-Memory Optimizations for Inter-Virtual-Machine Communication. \textit{ACM Computing Surveys 48, 4} (May 2016).}
 
 
 \section{Requirements}
-The requirements for the thesis will be primarily set over the course of the research phase, however, there are some primary requirements that are binary in nature. Following is a list of requirements that must be met for the project
+The requirements for the thesis will be primarily set over the course of the research phase, however, there are some primary requirements that are binary in nature. Following is a list of requirements that must be met for the project without a single failure:
 \begin{itemize}
-	\item Both guest operating systems must have direct read-write access to shared memory across the hypervisor
-	\item The latency for communication must be less than 60Hz refresh rate of the infotainment system. This translates to a maximum allowable latency of 33.3 ms for the cross-VM communication.
-	\item Android OS kernel module and processing must not pose any viable risk to the high criticality timing guarantees of the RTOS
+	\item Both guest operating systems must have direct read-write access to shared memory across the hypervisor.
+	\item Latency for communication must be less than 60Hz refresh rate of the infotainment system. This translates to a maximum allowable latency of 33.3 ms for the cross-VM communication.
+	\item There must be no CAN packets or messages that are dropped or missed during communication.
+	\item Android OS kernel module and processing must not pose any viable risk to the high criticality.
 \end{itemize}
+
 
 \section{Deliverables}
 Following is a list of the tentative deliverable for the thesis. Note that depending on design decisions made over the course of the research, some components may be added or removed, therefore the tentative nature of the list.
 
 \begin{itemize}
-	\item Linux or Quest-V (host) driver to set up the shared buffer
-	\item Linux or Quest (guest) driver as a producer for buffer
-	\item Android (guest) driver as consumer of buffer
-	\item Demonstration of the functionality of the above three on hardware (possibly requiring userland programsd)
-	\item Thesis
+	\item Linux or Quest-V (host) driver to set up the shared buffer.
+	\item Linux or Quest (guest) driver as a producer for buffer.
+	\item Android (guest) driver as consumer of buffer.
+	\item Demonstration of the functionality of the above three on hardware (possibly requiring userland programs).
+	\item Final Thesis.
 \end{itemize}
-
 
 \end{document}
